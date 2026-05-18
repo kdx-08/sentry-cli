@@ -36,6 +36,7 @@ Output/
 
 # Inno Setup
 *.iss.bak
+*.iss
 
 # =========================
 # Logs
