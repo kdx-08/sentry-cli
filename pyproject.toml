@@ -1,0 +1,15 @@
+[project]
+name = "sentry"
+version = "1.0.0"
+description = "Sentry is a local encrypted password vault manager."
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
