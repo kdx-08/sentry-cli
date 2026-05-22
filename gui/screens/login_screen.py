@@ -83,7 +83,7 @@ class Login(customtkinter.CTkFrame):
             text="Sentry",
             width=200,
             height=30,
-            font=("Noto Sans Bold", 20),
+            font=("Lexend Bold", 24),
         )
         password_entry = customtkinter.CTkEntry(
             login_frame,
@@ -91,8 +91,7 @@ class Login(customtkinter.CTkFrame):
             height=40,
             corner_radius=4,
             placeholder_text="Master Password",
-            show="*",
-            font=("Noto Sans Bold", 13),
+            show="●",
         )
         validate_btn = customtkinter.CTkButton(
             login_frame,

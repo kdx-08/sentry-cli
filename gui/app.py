@@ -6,6 +6,7 @@ from sentry.parser import read_config
 
 customtkinter.set_default_color_theme("gui/assets/theme/theme.json")
 customtkinter.set_appearance_mode(read_config("appearance"))
+customtkinter.FontManager().load_font("gui/assets/fonts/Lexend-VariableFont.ttf")
 
 
 class App(customtkinter.CTk):

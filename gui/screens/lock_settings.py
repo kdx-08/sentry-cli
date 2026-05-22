@@ -21,7 +21,7 @@ class LockSettings(customtkinter.CTkFrame):
     def generate_header(self):
         header_frame = customtkinter.CTkFrame(self)
         settings_label = customtkinter.CTkLabel(
-            header_frame, text="Settings", font=("Noto Sans Bold", 28)
+            header_frame, text="Settings", font=("Lexend Bold", 28)
         )
         hr = customtkinter.CTkFrame(header_frame, height=4)
 
@@ -34,7 +34,7 @@ class LockSettings(customtkinter.CTkFrame):
 
         appearance = customtkinter.CTkFrame(settings_frame)
         appearance_text = customtkinter.CTkLabel(
-            appearance, text="Appearance", font=("Noto Sans Bold", 20)
+            appearance, text="Appearance", font=("Lexend SemiBold", 24)
         )
         l_frame = customtkinter.CTkFrame(
             appearance, corner_radius=10, fg_color=("#f0f0f0", "#282828")
@@ -70,7 +70,7 @@ class LockSettings(customtkinter.CTkFrame):
 
         reset = customtkinter.CTkFrame(settings_frame)
         reset_text = customtkinter.CTkLabel(
-            reset, text="Reset", font=("Noto Sans Bold", 20)
+            reset, text="Reset", font=("Lexend SemiBold", 24)
         )
         reset_frame = customtkinter.CTkFrame(reset, corner_radius=10)
         reset_frame.grid_columnconfigure(0, weight=3)

@@ -341,17 +341,17 @@
   },
   "CTkFont": {
     "macOS": {
-      "family": "Noto Sans",
+      "family": "Lexend",
       "size": 13,
       "weight": "normal"
     },
     "Windows": {
-      "family": "Noto Sans",
+      "family": "Lexend",
       "size": 13,
       "weight": "normal"
     },
     "Linux": {
-      "family": "Noto Sans",
+      "family": "Lexend",
       "size": 13,
       "weight": "normal"
     }
