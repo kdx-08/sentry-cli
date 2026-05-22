@@ -2,55 +2,61 @@ import ctypes
 import json
 import platform
 import secrets
+
+from cryptography.fernet import InvalidToken
 from pathlib import Path
 
 from sentry.crypto.crypto_utils import decrypt, encrypt
 
 SENTRY_DIR = Path.home() / ".sentry"
-default_vault = SENTRY_DIR / "default.enc"
-default_salt = SENTRY_DIR / "salt"
+DEFAULT_VAULT = SENTRY_DIR / "default.enc"
+DEFAULT_SALT = SENTRY_DIR / "salt"
+CONFIG_FILE = SENTRY_DIR / "settings.json"
 
 
 def reset_app_data():
-    default_vault.unlink(missing_ok=True)
-    default_salt.unlink(missing_ok=True)
+    DEFAULT_VAULT.unlink(missing_ok=True)
+    DEFAULT_SALT.unlink(missing_ok=True)
     SENTRY_DIR.rmdir()
     return True
 
 
 def check_default_vault():
-    return default_vault.is_file()
+    return DEFAULT_VAULT.is_file()
 
 
 def generate_default_vault(key: str):
-    default_vault.parent.mkdir(parents=True, exist_ok=True)
-    default_salt.parent.mkdir(parents=True, exist_ok=True)
+    DEFAULT_VAULT.parent.mkdir(parents=True, exist_ok=True)
+    DEFAULT_SALT.parent.mkdir(parents=True, exist_ok=True)
     if platform.system() == "Windows":
         ctypes.windll.kernel32.SetFileAttributesW(str(SENTRY_DIR), 0x02)
     gen_salt = secrets.token_bytes(16)
-    with open(default_salt, "wb") as file:
+    with open(DEFAULT_SALT, "wb") as file:
         file.write(gen_salt)
     data = json.dumps({"entries": []})
     encrypted_data = encrypt(data, key, gen_salt)
-    with open(default_vault, "wb") as vault:
+    with open(DEFAULT_VAULT, "wb") as vault:
         vault.write(encrypted_data)
 
 
 def unlock_default_vault(key):
-    result = None
-    with open(default_salt, "rb") as salt_file:
-        salt = salt_file.read()
-    with open(default_vault, "rb") as vault:
-        payload = vault.read()
-        decrypted_data = decrypt(payload, key, salt)
-        result = json.loads(decrypted_data)
-    return result
+    try:
+        result = None
+        with open(DEFAULT_SALT, "rb") as salt_file:
+            salt = salt_file.read()
+        with open(DEFAULT_VAULT, "rb") as vault:
+            payload = vault.read()
+            decrypted_data = decrypt(payload, key, salt)
+            result = json.loads(decrypted_data)
+    except InvalidToken:
+        return False
+    return str(type(result)) == "<class 'dict'>"
 
 
 def write_vault_data(key, payload):
-    with open(default_salt, "rb") as salt_file:
+    with open(DEFAULT_SALT, "rb") as salt_file:
         salt = salt_file.read()
-    with open(default_vault, "wb") as vault:
+    with open(DEFAULT_VAULT, "wb") as vault:
         json_payload = json.dumps(payload)
         encrypted_data = encrypt(json_payload, key, salt)
         vault.write(encrypted_data)
