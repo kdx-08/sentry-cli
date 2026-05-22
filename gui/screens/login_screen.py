@@ -57,7 +57,10 @@ class Login(customtkinter.CTkFrame):
 
     def generate_login_widget(self, master):
         def validate_command():
-            validated = unlock_default_vault(password_entry.get())
+            validated = (
+                str(type(unlock_default_vault(password_entry.get())))
+                == "<class 'dict'>"
+            )
             if validated:
                 master.master_password = password_entry.get()
                 master.dashboard_screen()

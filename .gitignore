@@ -16,7 +16,7 @@ env/
 # =========================
 build/
 dist/
-
+releases/
 *.build/
 *.dist/
 

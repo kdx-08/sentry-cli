@@ -41,6 +41,7 @@ class Dashboard(customtkinter.CTkFrame):
         self.grid_rowconfigure(0, weight=1, uniform="a")
         self.grid_rowconfigure(1, weight=12, uniform="a")
 
+        self.master = master
         self.sidebar = self.generate_sidebar(master)
         self.addentry = self.generate_add_entry()
         self.mainframe = Passwords(self)
@@ -170,7 +171,7 @@ class Dashboard(customtkinter.CTkFrame):
 
     def clear_active_frame(self):
         if self.mainframe:
-            self.mainframe = None
+            self.mainframe.destroy()
 
     def switch_passwords(self):
         self.clear_active_frame()
@@ -194,5 +195,5 @@ class Dashboard(customtkinter.CTkFrame):
 
     def switch_new_entry(self):
         self.clear_active_frame()
-        self.mainframe = NewEntry(self)
+        self.mainframe = NewEntry(self, self.master)
         self.mainframe.grid(row=1, column=1, sticky="news")

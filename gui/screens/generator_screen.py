@@ -10,10 +10,10 @@ class Generator(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.label = customtkinter.CTkLabel(
-            self, text="Password Generator", font=("Lexend Bold", 28)
+            self, text="Password Generator", font=("Lexend Bold", 24)
         )
         self.pg_widget = self.generate_widget()
-        self.label.pack(padx=20, pady=(10, 20), anchor="w")
+        self.label.pack(padx=20, pady=10, anchor="w")
         self.pg_widget.pack(padx=20, pady=(0, 265), fill="both", expand=True)
 
     def generate_widget(self):
@@ -139,7 +139,7 @@ class Generator(customtkinter.CTkFrame):
             command=gen_pass,
         )
 
-        pg_text.pack(padx=10, pady=(10, 0), anchor="w")
+        pg_text.pack(padx=15, pady=(10, 0), anchor="w")
         pg_output.grid(row=0, column=0, sticky="w", ipadx=16, ipady=10)
         copy_button.grid(row=0, column=1, sticky="e")
         pg_output_frame.pack(padx=15, fill="both")

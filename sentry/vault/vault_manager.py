@@ -33,7 +33,7 @@ def generate_default_vault(key: str):
     gen_salt = secrets.token_bytes(16)
     with open(DEFAULT_SALT, "wb") as file:
         file.write(gen_salt)
-    data = json.dumps({"entries": []})
+    data = json.dumps({"entries": {}})
     encrypted_data = encrypt(data, key, gen_salt)
     with open(DEFAULT_VAULT, "wb") as vault:
         vault.write(encrypted_data)
@@ -50,7 +50,7 @@ def unlock_default_vault(key):
             result = json.loads(decrypted_data)
     except InvalidToken:
         return False
-    return str(type(result)) == "<class 'dict'>"
+    return result
 
 
 def write_vault_data(key, payload):
@@ -64,55 +64,47 @@ def write_vault_data(key, payload):
 
 
 def fetch_vault_data(key, id):
-    payload = unlock_default_vault(key)
-    for entry in payload["entries"]:
-        if entry.get("id") == id.lower():
-            return entry
+    cred_store = unlock_default_vault(key)
+    if id in cred_store["entries"]:
+        return cred_store["entries"][id]
     return None
 
 
-def add_new_vault_data(key, id, username, password):
-    id = id.lower()
-    payload = unlock_default_vault(key)
+def add_new_vault_data(key, id, service, username, password, url):
+    cred_store = unlock_default_vault(key)
     if id in get_credential_list(key):
-        print("Identifier exists, try another one.")
         return None
-    payload["entries"].append({"id": id, "username": username, "password": password})
-    return write_vault_data(key, payload)
+    cred_store["entries"][id] = {
+        "id": id,
+        "service": service,
+        "username": username,
+        "password": password,
+        "url": url,
+    }
+    return write_vault_data(key, cred_store)
 
 
-def update_vault_data(key, id, username, password):
-    id = id.lower()
-    payload = unlock_default_vault(key)
+def update_vault_data(key, id, service, username, password, url):
+    cred_store = unlock_default_vault(key)
     if id not in get_credential_list(key):
         print("Identifer does not exist. Try again.")
         return None
-    for entry in payload["entries"]:
-        if entry.get("id") == id:
-            entry["username"] = username
-            entry["password"] = password
-    return write_vault_data(key, payload)
+    cred_store["entries"][id]["service"] = service
+    cred_store["entries"][id]["username"] = username
+    cred_store["entries"][id]["password"] = password
+    cred_store["entries"][id]["url"] = url
+    return write_vault_data(key, cred_store)
 
 
 def remove_vault_data(key, id):
-    id = id.lower()
-    payload = unlock_default_vault(key)
+    cred_store = unlock_default_vault(key)
     if id not in get_credential_list(key):
         print("Identifier does not exist. Try again.")
         return None
-    index = 0
-
-    for entry in payload["entries"]:
-        if entry.get("id") == id:
-            payload["entries"].remove(entry)
-            break
-        index += 1
-    return write_vault_data(key, payload)
+    cred_store["entries"].pop(id)
+    return write_vault_data(key, cred_store)
 
 
 def get_credential_list(key):
-    payload = unlock_default_vault(key)
-    cred_list = []
-    for entry in payload["entries"]:
-        cred_list.append(entry["id"].lower())
-    return cred_list
+    cred_store = unlock_default_vault(key)
+    return list(cred_store["entries"].keys())
