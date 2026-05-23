@@ -34,7 +34,7 @@ class NewEntry(customtkinter.CTkFrame):
             else:
                 response.configure(text="Something went wrong", text_color="#aa0000")
 
-            self.after(1000, self.destroy)
+            self.after(1000, self.master.clear_active_frame())
 
         form = customtkinter.CTkFrame(
             self, fg_color=("#e0e0e0", "#282828"), border_width=0, corner_radius=8

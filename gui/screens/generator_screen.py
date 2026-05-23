@@ -127,7 +127,9 @@ class Generator(customtkinter.CTkFrame):
             corner_radius=4,
             text_color=("#ffffff", "#2563ec"),
             fg_color=("#2563ec", "#283d53"),
-            command=lambda:master.switch_new_entry(generated_password=pg_output.cget("text")),
+            command=lambda: master.switch_new_entry(
+                generated_password=pg_output.cget("text")
+            ),
         )
         gen_btn = customtkinter.CTkButton(
             pg_btn_frame,

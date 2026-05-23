@@ -36,7 +36,7 @@ class LockSettings(customtkinter.CTkFrame):
 
         appearance = customtkinter.CTkFrame(settings_frame)
         appearance_text = customtkinter.CTkLabel(
-            appearance, text="Appearance", font=("Lexend SemiBold", 24)
+            appearance, text="Appearance", font=("Lexend Bold", 24)
         )
         l_frame = customtkinter.CTkFrame(
             appearance, corner_radius=10, fg_color=("#f0f0f0", "#282828")
@@ -72,7 +72,7 @@ class LockSettings(customtkinter.CTkFrame):
 
         reset = customtkinter.CTkFrame(settings_frame)
         reset_text = customtkinter.CTkLabel(
-            reset, text="Reset", font=("Lexend SemiBold", 24)
+            reset, text="Reset", font=("Lexend Bold", 24)
         )
         reset_frame = customtkinter.CTkFrame(reset, corner_radius=10)
         reset_frame.grid_columnconfigure(0, weight=3)
@@ -89,7 +89,7 @@ class LockSettings(customtkinter.CTkFrame):
             hover=False,
             height=32,
             corner_radius=4,
-            command=lambda:reset_sentry_application(reset_desc),
+            command=lambda: reset_sentry_application(reset_desc),
         )
         reset_text.pack(pady=(26, 0), anchor="w")
         reset_desc.grid(row=0, column=0, sticky="w")

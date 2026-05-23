@@ -50,7 +50,7 @@ class Settings(customtkinter.CTkFrame):
 
         appearance = customtkinter.CTkFrame(settings_frame)
         appearance_text = customtkinter.CTkLabel(
-            appearance, text="Appearance", font=("Lexend SemiBold", 24)
+            appearance, text="Appearance", font=("Lexend Bold", 24)
         )
         l_frame = customtkinter.CTkFrame(
             appearance, corner_radius=10, fg_color=("#f0f0f0", "#282828")
@@ -85,9 +85,7 @@ class Settings(customtkinter.CTkFrame):
         appearance.pack(expand=True, fill="both", anchor="w")
 
         db = customtkinter.CTkFrame(settings_frame)
-        db_text = customtkinter.CTkLabel(
-            db, text="Database", font=("Lexend SemiBold", 24)
-        )
+        db_text = customtkinter.CTkLabel(db, text="Database", font=("Lexend Bold", 24))
         db_frame = customtkinter.CTkFrame(db)
         db_frame.grid_columnconfigure((0, 1, 2), weight=3, uniform="a")
         db_frame.grid_columnconfigure(3, weight=2, uniform="a")
@@ -113,7 +111,7 @@ class Settings(customtkinter.CTkFrame):
 
         reset = customtkinter.CTkFrame(settings_frame)
         reset_text = customtkinter.CTkLabel(
-            reset, text="Reset", font=("Lexend SemiBold", 24)
+            reset, text="Reset", font=("Lexend Bold", 24)
         )
         reset_frame = customtkinter.CTkFrame(reset, corner_radius=10)
         reset_frame.grid_columnconfigure(0, weight=3)
@@ -130,7 +128,7 @@ class Settings(customtkinter.CTkFrame):
             hover=False,
             height=32,
             corner_radius=4,
-            command=lambda:reset_sentry_application(reset_desc=reset_desc),
+            command=lambda: reset_sentry_application(reset_desc=reset_desc),
         )
 
         reset_text.pack(pady=(26, 0), anchor="w")

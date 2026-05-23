@@ -6,7 +6,7 @@ import secrets
 from cryptography.fernet import InvalidToken
 
 from sentry.crypto.crypto_utils import decrypt, encrypt
-from sentry.parser import DEFAULT_SALT, DEFAULT_VAULT, SENTRY_DIR, CONFIG_FILE
+from sentry.parser import CONFIG_FILE, DEFAULT_SALT, DEFAULT_VAULT, SENTRY_DIR
 
 
 def reset_app_data():

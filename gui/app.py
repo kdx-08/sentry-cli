@@ -1,5 +1,8 @@
-import customtkinter
 import sys
+from tkinter import messagebox
+
+import customtkinter
+
 from gui.screens.dashboard_screen import Dashboard
 from gui.screens.login_screen import Login
 from sentry.parser import read_config
@@ -15,9 +18,11 @@ class App(customtkinter.CTk):
         self.title("Sentry")
         self.iconbitmap("gui/assets/img/sentry-ico.ico")
         self.resizable(False, False)
+        self.protocol("WM_DELETE_WINDOW", self.close_app)
 
         if sys.platform.startswith("win"):
             import ctypes
+
             ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
         screen_width = self.winfo_screenwidth()
@@ -32,6 +37,12 @@ class App(customtkinter.CTk):
         self.current_screen = None
         self.master_password = ""
         self.login_screen()
+
+    def close_app(self):
+        if messagebox.askokcancel(
+            title="Exit Sentry", message="Do you want to quit Sentry?"
+        ):
+            sys.exit(0)
 
     def clear_screen(self):
         if self.current_screen:

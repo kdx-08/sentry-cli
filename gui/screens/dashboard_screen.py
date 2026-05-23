@@ -172,10 +172,16 @@ class Dashboard(customtkinter.CTkFrame):
         return entry_frame
 
     def clear_active_frame(self):
+        self.default.destroy()
+        self.default = Passwords(self)
+        self.default.grid(row=1, column=1, sticky="news")
         if self.mainframe:
             self.mainframe.destroy()
 
     def switch_passwords(self):
+        self.default.destroy()
+        self.default = Passwords(self)
+        self.default.grid(row=1, column=1, sticky="news")
         self.clear_active_frame()
 
     def switch_notes(self):
@@ -189,11 +195,14 @@ class Dashboard(customtkinter.CTkFrame):
         self.mainframe.grid(row=1, column=1, sticky="news")
 
     def switch_settings(self):
-        self.clear_active_frame()
+        if self.mainframe:
+            self.mainframe.destroy()
         self.mainframe = Settings(self, self.master)
         self.mainframe.grid(row=1, column=1, sticky="news")
 
     def switch_new_entry(self, generated_password=None):
         self.clear_active_frame()
-        self.mainframe = NewEntry(self, parent=self.master, generated_password=generated_password)
+        self.mainframe = NewEntry(
+            self, parent=self.master, generated_password=generated_password
+        )
         self.mainframe.grid(row=1, column=1, sticky="news")

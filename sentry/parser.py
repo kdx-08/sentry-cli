@@ -7,6 +7,20 @@ DEFAULT_SALT = SENTRY_DIR / "salt"
 CONFIG_FILE = SENTRY_DIR / "settings.json"
 
 
+def tabularize_cred(entries):
+    entries = entries["entries"]
+    data = []
+    for entry in entries:
+        new_entry = [
+            entries[entry]["service"],
+            entries[entry]["username"],
+            entries[entry]["password"],
+            entry,
+        ]
+        data.append(new_entry)
+    return data
+
+
 def read_config(key):
     with open(CONFIG_FILE, "r") as config:
         settings = json.loads(config.read())
