@@ -5,16 +5,16 @@ from sentry.vault.vault_manager import add_new_vault_data, unlock_default_vault
 
 
 class NewEntry(customtkinter.CTkFrame):
-    def __init__(self, master, parent):
+    def __init__(self, master, parent, generated_password=None):
         super().__init__(master)
         self.form_title = customtkinter.CTkLabel(
             self, text="New Credential", font=("Lexend Bold", 28)
         )
-        self.form = self.generate_form_widget(parent)
+        self.form = self.generate_form_widget(parent, generated_password)
         self.form_title.pack(padx=20, pady=10, anchor="w")
         self.form.pack(padx=20, pady=(0, 155), fill="both", expand=True)
 
-    def generate_form_widget(self, parent):
+    def generate_form_widget(self, parent, generated_password=None):
         def save_credential():
             cred_store = unlock_default_vault(parent.master_password)
             id = generate_id()
@@ -93,4 +93,6 @@ class NewEntry(customtkinter.CTkFrame):
         save_btn.grid(row=0, column=2)
         options_frame.pack(pady=(10, 20), fill="both", anchor="e")
 
+        if generated_password:
+            password.insert(0, generated_password)
         return form

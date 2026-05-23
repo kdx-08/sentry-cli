@@ -9,16 +9,16 @@ copy_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "copy.pn
 
 
 class Generator(customtkinter.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master, parent):
         super().__init__(master)
         self.label = customtkinter.CTkLabel(
             self, text="Password Generator", font=("Lexend Bold", 28)
         )
-        self.pg_widget = self.generate_widget()
+        self.pg_widget = self.generate_widget(master, parent)
         self.label.pack(padx=20, pady=10, anchor="w")
         self.pg_widget.pack(padx=20, pady=(0, 265), fill="both", expand=True)
 
-    def generate_widget(self):
+    def generate_widget(self, master, parent):
         def update_pass_len(value):
             password_len_label.configure(text=f"No. of characters: {int(value)}")
 
@@ -119,6 +119,16 @@ class Generator(customtkinter.CTkFrame):
             corner_radius=4,
             command=copy_gen_pass,
         )
+        save_btn = customtkinter.CTkButton(
+            pg_btn_frame,
+            text="Save password",
+            hover=False,
+            height=40,
+            corner_radius=4,
+            text_color=("#ffffff", "#2563ec"),
+            fg_color=("#2563ec", "#283d53"),
+            command=lambda:master.switch_new_entry(generated_password=pg_output.cget("text")),
+        )
         gen_btn = customtkinter.CTkButton(
             pg_btn_frame,
             text="Generate password",
@@ -126,8 +136,6 @@ class Generator(customtkinter.CTkFrame):
             height=40,
             corner_radius=4,
             command=gen_pass,
-            text_color=("#ffffff", "#2563ec"),
-            fg_color=("#2563ec", "#283d53"),
         )
 
         pg_text.pack(padx=15, pady=(10, 0), anchor="w")
@@ -140,8 +148,9 @@ class Generator(customtkinter.CTkFrame):
         include_numbers.grid(row=1, column=1, sticky="w", padx=15, pady=12)
         include_uppercase.grid(row=2, column=0, sticky="w", padx=15, pady=12)
         pg_options_frame.pack(pady=10, fill="both")
-        copy_btn.grid(row=0, column=1, sticky="news", padx=(15, 5))
-        gen_btn.grid(row=0, column=0, sticky="news", padx=15)
+        copy_btn.grid(row=0, column=0, sticky="news", padx=(15, 5))
+        save_btn.grid(row=0, column=1, sticky="news", padx=(5, 0))
+        gen_btn.grid(row=0, column=3, sticky="news", padx=(0, 15))
         pg_btn_frame.pack(pady=10, fill="both")
 
         return pg_frame

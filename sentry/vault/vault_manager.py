@@ -6,12 +6,13 @@ import secrets
 from cryptography.fernet import InvalidToken
 
 from sentry.crypto.crypto_utils import decrypt, encrypt
-from sentry.parser import DEFAULT_SALT, DEFAULT_VAULT, SENTRY_DIR
+from sentry.parser import DEFAULT_SALT, DEFAULT_VAULT, SENTRY_DIR, CONFIG_FILE
 
 
 def reset_app_data():
     DEFAULT_VAULT.unlink(missing_ok=True)
     DEFAULT_SALT.unlink(missing_ok=True)
+    CONFIG_FILE.unlink(missing_ok=True)
     SENTRY_DIR.rmdir()
     return True
 

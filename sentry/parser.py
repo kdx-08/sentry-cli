@@ -29,4 +29,4 @@ def write_config(key, value):
     return True
 
 
-DEFAULT_VAULT = read_config("db_path")
+DEFAULT_VAULT = Path(read_config("db_path"))

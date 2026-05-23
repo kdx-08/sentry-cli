@@ -185,7 +185,7 @@ class Dashboard(customtkinter.CTkFrame):
 
     def switch_generator(self):
         self.clear_active_frame()
-        self.mainframe = Generator(self)
+        self.mainframe = Generator(self, self.master)
         self.mainframe.grid(row=1, column=1, sticky="news")
 
     def switch_settings(self):
@@ -193,7 +193,7 @@ class Dashboard(customtkinter.CTkFrame):
         self.mainframe = Settings(self, self.master)
         self.mainframe.grid(row=1, column=1, sticky="news")
 
-    def switch_new_entry(self):
+    def switch_new_entry(self, generated_password=None):
         self.clear_active_frame()
-        self.mainframe = NewEntry(self, self.master)
+        self.mainframe = NewEntry(self, parent=self.master, generated_password=generated_password)
         self.mainframe.grid(row=1, column=1, sticky="news")

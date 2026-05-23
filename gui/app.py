@@ -1,5 +1,5 @@
 import customtkinter
-
+import sys
 from gui.screens.dashboard_screen import Dashboard
 from gui.screens.login_screen import Login
 from sentry.parser import read_config
@@ -13,9 +13,18 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
         self.title("Sentry")
-        self.geometry("960x720")
         self.iconbitmap("gui/assets/img/sentry-ico.ico")
         self.resizable(False, False)
+
+        if sys.platform.startswith("win"):
+            import ctypes
+            ctypes.windll.shcore.SetProcessDpiAwareness(1)
+
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        x = (screen_width // 2) - (960 // 2)
+        y = (screen_height // 2) - (720 // 2)
+        self.geometry(f"{960}x{720}+{x}+{y}")
 
         self.username = read_config("username")
         self.theme = customtkinter.StringVar(value=read_config("appearance"))

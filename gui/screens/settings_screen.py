@@ -1,5 +1,6 @@
 import customtkinter
 
+from gui.dialogs.reset_dialog import reset_sentry_application
 from sentry.parser import write_config
 from sentry.vault.vault_manager import SENTRY_DIR
 
@@ -129,7 +130,7 @@ class Settings(customtkinter.CTkFrame):
             hover=False,
             height=32,
             corner_radius=4,
-            command=self.reset_app,
+            command=lambda:reset_sentry_application(reset_desc=reset_desc),
         )
 
         reset_text.pack(pady=(26, 0), anchor="w")
@@ -174,6 +175,3 @@ class Settings(customtkinter.CTkFrame):
         save_btn.grid(row=0, column=2)
         cancel_btn.grid(row=0, column=1, padx=16)
         return options_frame
-
-    def reset_app(self):
-        print("reset app")

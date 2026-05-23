@@ -1,5 +1,6 @@
 import customtkinter
 
+from gui.dialogs.reset_dialog import reset_sentry_application
 from sentry.parser import write_config
 
 
@@ -88,9 +89,8 @@ class LockSettings(customtkinter.CTkFrame):
             hover=False,
             height=32,
             corner_radius=4,
-            command=self.reset_app,
+            command=lambda:reset_sentry_application(reset_desc),
         )
-
         reset_text.pack(pady=(26, 0), anchor="w")
         reset_desc.grid(row=0, column=0, sticky="w")
         reset_btn.grid(row=0, column=1, sticky="e")
@@ -130,6 +130,3 @@ class LockSettings(customtkinter.CTkFrame):
         save_btn.grid(row=0, column=2)
         cancel_btn.grid(row=0, column=1, padx=16)
         return options_frame
-
-    def reset_app(self):
-        print("reset app")
