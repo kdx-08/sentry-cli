@@ -1,11 +1,11 @@
-import customtkinter
+from pathlib import Path
 import sys
 
-from pathlib import Path
+import customtkinter
 from PIL import Image
-from sentry.vault.vault_manager import unlock_default_vault
-from gui.screens.lock_settings import LockSettings
 
+from gui.screens.lock_settings import LockSettings
+from sentry.vault.vault_manager import unlock_default_vault
 
 img_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "sentry-ico.png"
 ds_path = (
@@ -57,14 +57,17 @@ class Login(customtkinter.CTkFrame):
 
     def generate_login_widget(self, master):
         def validate_command():
-            validated = (
-                str(type(unlock_default_vault(password_entry.get())))
-                == "<class 'dict'>"
-            )
-            if validated:
-                master.master_password = password_entry.get()
-                master.dashboard_screen()
-            else:
+            try:
+                validated = (
+                    str(type(unlock_default_vault(password_entry.get())))
+                    == "<class 'dict'>"
+                )
+                if validated:
+                    master.master_password = password_entry.get()
+                    master.dashboard_screen()
+                else:
+                    raise Exception()
+            except Exception:
                 self.incorrect_count += 1
                 password_entry.delete(0, "end")
                 error_msg.configure(text=f"Wrong attempt: {self.incorrect_count}")
@@ -86,7 +89,7 @@ class Login(customtkinter.CTkFrame):
             text="Sentry",
             width=200,
             height=30,
-            font=("Lexend Bold", 24),
+            font=("Lexend Bold", 28),
         )
         password_entry = customtkinter.CTkEntry(
             login_frame,

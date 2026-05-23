@@ -1,6 +1,8 @@
-import customtkinter
 from pathlib import Path
+
+import customtkinter
 from PIL import Image
+
 from sentry.generator import generate_password
 
 copy_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "copy.png"
@@ -10,7 +12,7 @@ class Generator(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.label = customtkinter.CTkLabel(
-            self, text="Password Generator", font=("Lexend Bold", 24)
+            self, text="Password Generator", font=("Lexend Bold", 28)
         )
         self.pg_widget = self.generate_widget()
         self.label.pack(padx=20, pady=10, anchor="w")
@@ -37,9 +39,6 @@ class Generator(customtkinter.CTkFrame):
             length = int(password_len.get())
             password = generate_password(length, is_, in_, iu_)
             pg_output.configure(text=password)
-
-        def save_gen_pass():
-            pass
 
         pg_frame = customtkinter.CTkFrame(
             self, fg_color=("#e0e0e0", "#282828"), corner_radius=8
@@ -120,16 +119,6 @@ class Generator(customtkinter.CTkFrame):
             corner_radius=4,
             command=copy_gen_pass,
         )
-        save_btn = customtkinter.CTkButton(
-            pg_btn_frame,
-            text="Save password",
-            hover=False,
-            height=40,
-            corner_radius=4,
-            text_color=("#ffffff", "#2563ec"),
-            fg_color=("#2563ec", "#283d53"),
-            command=save_gen_pass,
-        )
         gen_btn = customtkinter.CTkButton(
             pg_btn_frame,
             text="Generate password",
@@ -137,6 +126,8 @@ class Generator(customtkinter.CTkFrame):
             height=40,
             corner_radius=4,
             command=gen_pass,
+            text_color=("#ffffff", "#2563ec"),
+            fg_color=("#2563ec", "#283d53"),
         )
 
         pg_text.pack(padx=15, pady=(10, 0), anchor="w")
@@ -149,9 +140,8 @@ class Generator(customtkinter.CTkFrame):
         include_numbers.grid(row=1, column=1, sticky="w", padx=15, pady=12)
         include_uppercase.grid(row=2, column=0, sticky="w", padx=15, pady=12)
         pg_options_frame.pack(pady=10, fill="both")
-        copy_btn.grid(row=0, column=0, sticky="news", padx=(15, 5))
-        save_btn.grid(row=0, column=1, sticky="news", padx=(5, 15))
-        gen_btn.grid(row=0, column=3, sticky="news", padx=15)
+        copy_btn.grid(row=0, column=1, sticky="news", padx=(15, 5))
+        gen_btn.grid(row=0, column=0, sticky="news", padx=15)
         pg_btn_frame.pack(pady=10, fill="both")
 
         return pg_frame

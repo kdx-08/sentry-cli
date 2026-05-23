@@ -1,5 +1,10 @@
 import json
-from sentry.vault.vault_manager import CONFIG_FILE
+import os
+from pathlib import Path
+
+SENTRY_DIR = Path(os.environ["APPDATA"]) / ".sentry"
+DEFAULT_SALT = SENTRY_DIR / "salt"
+CONFIG_FILE = SENTRY_DIR / "settings.json"
 
 
 def read_config(key):
@@ -22,3 +27,6 @@ def write_config(key, value):
     with open(CONFIG_FILE, "w") as config:
         config.write(json.dumps(settings))
     return True
+
+
+DEFAULT_VAULT = read_config("db_path")

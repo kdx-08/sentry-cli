@@ -4,14 +4,9 @@ import platform
 import secrets
 
 from cryptography.fernet import InvalidToken
-from pathlib import Path
 
 from sentry.crypto.crypto_utils import decrypt, encrypt
-
-SENTRY_DIR = Path.home() / ".sentry"
-DEFAULT_VAULT = SENTRY_DIR / "default.enc"
-DEFAULT_SALT = SENTRY_DIR / "salt"
-CONFIG_FILE = SENTRY_DIR / "settings.json"
+from sentry.parser import DEFAULT_SALT, DEFAULT_VAULT, SENTRY_DIR
 
 
 def reset_app_data():

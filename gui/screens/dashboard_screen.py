@@ -1,6 +1,7 @@
+from pathlib import Path
+
 import customtkinter
 from PIL import Image
-from pathlib import Path
 
 from gui.screens.generator_screen import Generator
 from gui.screens.new_entry_screen import NewEntry
@@ -44,10 +45,11 @@ class Dashboard(customtkinter.CTkFrame):
         self.master = master
         self.sidebar = self.generate_sidebar(master)
         self.addentry = self.generate_add_entry()
-        self.mainframe = Passwords(self)
+        self.default = Passwords(self)
+        self.mainframe = None
         self.sidebar.grid(row=0, column=0, rowspan=2, sticky="news")
         self.addentry.grid(row=0, column=1, sticky="news")
-        self.mainframe.grid(row=1, column=1, sticky="news")
+        self.default.grid(row=1, column=1, sticky="news")
 
     def generate_sidebar(self, master):
         sidebar = customtkinter.CTkFrame(
@@ -175,8 +177,6 @@ class Dashboard(customtkinter.CTkFrame):
 
     def switch_passwords(self):
         self.clear_active_frame()
-        self.mainframe = Passwords(self)
-        self.mainframe.grid(row=1, column=1, sticky="news")
 
     def switch_notes(self):
         self.clear_active_frame()
@@ -190,7 +190,7 @@ class Dashboard(customtkinter.CTkFrame):
 
     def switch_settings(self):
         self.clear_active_frame()
-        self.mainframe = Settings(self)
+        self.mainframe = Settings(self, self.master)
         self.mainframe.grid(row=1, column=1, sticky="news")
 
     def switch_new_entry(self):

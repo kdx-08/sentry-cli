@@ -1,4 +1,5 @@
 import customtkinter
+
 from sentry.parser import write_config
 
 

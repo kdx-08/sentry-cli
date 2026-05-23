@@ -1,17 +1,18 @@
 import customtkinter
+
 from sentry.generator import generate_id
-from sentry.vault.vault_manager import unlock_default_vault, add_new_vault_data
+from sentry.vault.vault_manager import add_new_vault_data, unlock_default_vault
 
 
 class NewEntry(customtkinter.CTkFrame):
     def __init__(self, master, parent):
         super().__init__(master)
         self.form_title = customtkinter.CTkLabel(
-            self, text="New Credential", font=("Lexend Bold", 24)
+            self, text="New Credential", font=("Lexend Bold", 28)
         )
         self.form = self.generate_form_widget(parent)
         self.form_title.pack(padx=20, pady=10, anchor="w")
-        self.form.pack(padx=20, pady=(0, 168), fill="both", expand=True)
+        self.form.pack(padx=20, pady=(0, 155), fill="both", expand=True)
 
     def generate_form_widget(self, parent):
         def save_credential():
