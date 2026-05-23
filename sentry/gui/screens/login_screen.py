@@ -4,15 +4,23 @@ import sys
 import customtkinter
 from PIL import Image
 
-from gui.screens.lock_settings import LockSettings
+from sentry.gui.screens.lock_settings import LockSettings
 from sentry.vault.vault_manager import unlock_default_vault
 
-img_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "sentry-ico.png"
+img_path = (
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "sentry-ico.png"
+)
 ds_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "settings-dark.png"
+    Path(__file__).resolve().parent.parent.parent
+    / "assets"
+    / "img"
+    / "settings-dark.png"
 )
 ls_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "settings-light.png"
+    Path(__file__).resolve().parent.parent.parent
+    / "assets"
+    / "img"
+    / "settings-light.png"
 )
 
 

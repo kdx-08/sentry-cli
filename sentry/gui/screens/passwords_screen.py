@@ -3,11 +3,11 @@ from pathlib import Path
 import customtkinter
 from PIL import Image
 
-from gui.dialogs.delete_dialog import delete_confirmation
+from sentry.gui.dialogs.delete_dialog import delete_confirmation
 from sentry.parser import tabularize_cred
 from sentry.vault.vault_manager import unlock_default_vault
 
-bin_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "bin.png"
+bin_path = Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "bin.png"
 
 
 class Passwords(customtkinter.CTkFrame):

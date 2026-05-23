@@ -3,34 +3,54 @@ from pathlib import Path
 import customtkinter
 from PIL import Image
 
-from gui.screens.generator_screen import Generator
-from gui.screens.new_entry_screen import NewEntry
-from gui.screens.notes_screen import Notes
-from gui.screens.passwords_screen import Passwords
-from gui.screens.settings_screen import Settings
+from sentry.gui.screens.generator_screen import Generator
+from sentry.gui.screens.new_entry_screen import NewEntry
+from sentry.gui.screens.notes_screen import Notes
+from sentry.gui.screens.passwords_screen import Passwords
+from sentry.gui.screens.settings_screen import Settings
 
-avatar_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "avatar.png"
-plus_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "plus.png"
+avatar_path = (
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "avatar.png"
+)
+plus_path = (
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "plus.png"
+)
 
-dfile_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "file-dark.png"
+dfile_path = (
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "file-dark.png"
+)
 lfile_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "file-light.png"
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "file-light.png"
 )
 dgenerator_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "generator-dark.png"
+    Path(__file__).resolve().parent.parent.parent
+    / "assets"
+    / "img"
+    / "generator-dark.png"
 )
 lgenerator_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "generator-light.png"
+    Path(__file__).resolve().parent.parent.parent
+    / "assets"
+    / "img"
+    / "generator-light.png"
 )
-dlock_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "lock-dark.png"
+dlock_path = (
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "lock-dark.png"
+)
 llock_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "lock-light.png"
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "lock-light.png"
 )
 dsettings_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "settings-dark.png"
+    Path(__file__).resolve().parent.parent.parent
+    / "assets"
+    / "img"
+    / "settings-dark.png"
 )
 lsettings_path = (
-    Path(__file__).resolve().parent.parent / "assets" / "img" / "settings-light.png"
+    Path(__file__).resolve().parent.parent.parent
+    / "assets"
+    / "img"
+    / "settings-light.png"
 )
 
 

@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 SENTRY_DIR = Path(os.environ["APPDATA"]) / ".sentry"
+DEFAULT_VAULT = SENTRY_DIR / "default.enc"
 DEFAULT_SALT = SENTRY_DIR / "salt"
 CONFIG_FILE = SENTRY_DIR / "settings.json"
 
@@ -41,6 +42,3 @@ def write_config(key, value):
     with open(CONFIG_FILE, "w") as config:
         config.write(json.dumps(settings))
     return True
-
-
-DEFAULT_VAULT = Path(read_config("db_path"))

@@ -5,7 +5,9 @@ from PIL import Image
 
 from sentry.generator import generate_password
 
-copy_path = Path(__file__).resolve().parent.parent / "assets" / "img" / "copy.png"
+copy_path = (
+    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "copy.png"
+)
 
 
 class Generator(customtkinter.CTkFrame):

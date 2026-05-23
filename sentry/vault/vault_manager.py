@@ -21,7 +21,7 @@ def check_default_vault():
     return DEFAULT_VAULT.is_file()
 
 
-def generate_default_vault(key: str):
+def generate_default_vault(key: str, username):
     DEFAULT_VAULT.parent.mkdir(parents=True, exist_ok=True)
     DEFAULT_SALT.parent.mkdir(parents=True, exist_ok=True)
     if platform.system() == "Windows":
@@ -33,6 +33,12 @@ def generate_default_vault(key: str):
     encrypted_data = encrypt(data, key, gen_salt)
     with open(DEFAULT_VAULT, "wb") as vault:
         vault.write(encrypted_data)
+    with open(CONFIG_FILE, "w") as config:
+        configuration = json.dumps(
+            {"username": username, "appearance": "dark", "db_path": str(DEFAULT_VAULT)},
+            indent=4,
+        )
+        config.write(configuration)
 
 
 def unlock_default_vault(key):

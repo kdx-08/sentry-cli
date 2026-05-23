@@ -1,22 +1,33 @@
+from pathlib import Path
 import sys
 from tkinter import messagebox
 
 import customtkinter
 
-from gui.screens.dashboard_screen import Dashboard
-from gui.screens.login_screen import Login
+from sentry.gui.screens.dashboard_screen import Dashboard
+from sentry.gui.screens.login_screen import Login
 from sentry.parser import read_config
 
-customtkinter.set_default_color_theme("gui/assets/theme/theme.json")
+SENTRY_ICON = Path(__file__).resolve().parent.parent / "assets" / "sentry-icon.ico"
+THEME_PATH = Path(__file__).resolve().parent.parent / "assets" / "theme" / "theme.json"
+FONT_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "assets"
+    / "fonts"
+    / "Lexend-VariableFont.ttf"
+)
+
+
+customtkinter.set_default_color_theme(str(THEME_PATH))
 customtkinter.set_appearance_mode(read_config("appearance"))
-customtkinter.FontManager().load_font("gui/assets/fonts/Lexend-VariableFont.ttf")
+customtkinter.FontManager().load_font(str(FONT_PATH))
 
 
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
         self.title("Sentry")
-        self.iconbitmap("gui/assets/img/sentry-ico.ico")
+        self.iconbitmap(str(SENTRY_ICON))
         self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", self.close_app)
 
@@ -57,7 +68,3 @@ class App(customtkinter.CTk):
         self.clear_screen()
         self.current_screen = Login(self)
         self.current_screen.pack(fill="both", expand=True)
-
-
-if __name__ == "__main__":
-    App().mainloop()
