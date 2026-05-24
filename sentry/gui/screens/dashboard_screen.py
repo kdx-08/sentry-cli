@@ -5,7 +5,8 @@ from PIL import Image
 
 from sentry.gui.screens.generator_screen import Generator
 from sentry.gui.screens.new_entry_screen import NewEntry
-from sentry.gui.screens.notes_screen import Notes
+
+# from sentry.gui.screens.notes_screen import Notes
 from sentry.gui.screens.passwords_screen import Passwords
 from sentry.gui.screens.settings_screen import Settings
 
@@ -16,12 +17,12 @@ plus_path = (
     Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "plus.png"
 )
 
-dfile_path = (
-    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "file-dark.png"
-)
-lfile_path = (
-    Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "file-light.png"
-)
+# dfile_path = (
+#   Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "file-dark.png"
+# )
+# lfile_path = (
+#   Path(__file__).resolve().parent.parent.parent / "assets" / "img" / "file-light.png"
+# )
 dgenerator_path = (
     Path(__file__).resolve().parent.parent.parent
     / "assets"
@@ -97,9 +98,9 @@ class Dashboard(customtkinter.CTkFrame):
         password_icon = customtkinter.CTkImage(
             light_image=Image.open(dlock_path), dark_image=Image.open(llock_path)
         )
-        notes_icon = customtkinter.CTkImage(
-            light_image=Image.open(dfile_path), dark_image=Image.open(lfile_path)
-        )
+        # notes_icon = customtkinter.CTkImage(
+        #     light_image=Image.open(dfile_path), dark_image=Image.open(lfile_path)
+        # )
         generator_icon = customtkinter.CTkImage(
             light_image=Image.open(dgenerator_path),
             dark_image=Image.open(lgenerator_path),
@@ -121,19 +122,19 @@ class Dashboard(customtkinter.CTkFrame):
             text_color=("#1e1e1e", "#ffffff"),
             command=self.switch_passwords,
         )
-        notes = customtkinter.CTkButton(
-            menu_frame,
-            text="Secure Notes",
-            image=notes_icon,
-            compound="left",
-            fg_color="transparent",
-            anchor="w",
-            hover_color=("#e0e0e0", "#1e1e1e"),
-            height=50,
-            corner_radius=8,
-            text_color=("#1e1e1e", "#ffffff"),
-            command=self.switch_notes,
-        )
+        # notes = customtkinter.CTkButton(
+        #     menu_frame,
+        #     text="Secure Notes",
+        #     image=notes_icon,
+        #     compound="left",
+        #     fg_color="transparent",
+        #     anchor="w",
+        #     hover_color=("#e0e0e0", "#1e1e1e"),
+        #     height=50,
+        #     corner_radius=8,
+        #     text_color=("#1e1e1e", "#ffffff"),
+        #     command=self.switch_notes,
+        # )
         generator = customtkinter.CTkButton(
             menu_frame,
             text="Generator",
@@ -162,7 +163,7 @@ class Dashboard(customtkinter.CTkFrame):
         )
 
         passwords.pack(pady=(5, 0), expand=True, fill="both")
-        notes.pack(pady=5, expand=True, fill="both")
+        # notes.pack(pady=5, expand=True, fill="both")
         generator.pack(pady=(0, 5), expand=True, fill="both")
         settings.pack(expand=True, fill="both")
 
@@ -204,10 +205,10 @@ class Dashboard(customtkinter.CTkFrame):
         self.default.grid(row=1, column=1, sticky="news")
         self.clear_active_frame()
 
-    def switch_notes(self):
-        self.clear_active_frame()
-        self.mainframe = Notes(self)
-        self.mainframe.grid(row=1, column=1, sticky="news")
+    # def switch_notes(self):
+    #     self.clear_active_frame()
+    #     self.mainframe = Notes(self)
+    #     self.mainframe.grid(row=1, column=1, sticky="news")
 
     def switch_generator(self):
         self.clear_active_frame()
