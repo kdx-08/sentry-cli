@@ -8,9 +8,12 @@ from sentry.vault.vault_manager import reset_app_data
 def reset_sentry_application(reset_desc):
     reset_dialog = customtkinter.CTkInputDialog(
         title="Reset Sentry",
-        text='Are you sure you want to reset Sentry? This will permanently erase all \
-encrypted passwords, secure notes, and stored application data from this \
-device. This action cannot be undone. Enter "RESET SENTRY" to proceed.',
+        text=(
+            "Are you sure you want to reset Sentry? This will permanently erase all "
+            "encrypted passwords, and stored application data from this device. This "
+            'action cannot be undone. Enter "RESET SENTRY" to proceed.'
+            ""
+        ),
     )
 
     screen_width = reset_dialog.winfo_screenwidth()

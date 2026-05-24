@@ -1,4 +1,5 @@
 import sys
+from textwrap import dedent
 import tkinter
 from tkinter import simpledialog
 
@@ -11,11 +12,13 @@ def check_first_run():
         root.withdraw()
         master_password = simpledialog.askstring(
             title="Sentry Setup",
-            prompt="\n  Welcome to Sentry, a local password manager.  \n  \
-You are requested to set the MASTER PASSWORD,  \n  \
-which you will further use to lock and unlock the vault.  \n\
-Remember, if you forget it, there is no recovery.  \n",
+            prompt=dedent("""
+                    Welcome to Sentry, a local password manager. You are
+                    requested to set the MASTER PASSWORD, which you will
+                    further use to lock and unlock the vault. Remember,
+                    if you forget it, there is no recovery.\n"""),
             show="●",
+            parent=root,
         )
         if master_password is None or not master_password:
             sys.exit(0)

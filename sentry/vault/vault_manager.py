@@ -35,7 +35,7 @@ def generate_default_vault(key: str, username):
         vault.write(encrypted_data)
     with open(CONFIG_FILE, "w") as config:
         configuration = json.dumps(
-            {"username": username, "appearance": "dark", "db_path": str(DEFAULT_VAULT)},
+            {"username": username, "appearance": "dark"},
             indent=4,
         )
         config.write(configuration)

@@ -1,8 +1,11 @@
+from pathlib import Path
+import shutil
+
 import customtkinter
 
 from sentry.gui.dialogs.reset_dialog import reset_sentry_application
 from sentry.parser import write_config
-from sentry.vault.vault_manager import SENTRY_DIR
+from sentry.vault.vault_manager import DEFAULT_VAULT, SENTRY_DIR
 
 
 class Settings(customtkinter.CTkFrame):
@@ -16,7 +19,7 @@ class Settings(customtkinter.CTkFrame):
         self.header = self.generate_header()
         self.settings = self.generate_settings(parent)
         self.options = self.generate_options(parent)
-        self.db_path = None
+        self.db_path = str(DEFAULT_VAULT)
 
         self.header.grid(row=0, column=1, columnspan=2, sticky="we")
         self.settings.grid(row=1, column=1, sticky="news", columnspan=2, rowspan=3)
@@ -34,13 +37,13 @@ class Settings(customtkinter.CTkFrame):
         return header_frame
 
     def generate_settings(self, master):
-        def browse_db_file():
-            filedialog = customtkinter.filedialog.askopenfilename(
-                initialdir=SENTRY_DIR, filetypes=[("ENC Files", "*.enc")]
+        def backup_db_dir():
+            filedialog = customtkinter.filedialog.asksaveasfilename(
+                initialdir=Path.home(),
+                filetypes=[("ZIP Archive", "*.zip")],
+                initialfile="sentry-backup",
             )
-            if filedialog != "":
-                db_desc_path.configure(text=filedialog)
-                self.db_path = filedialog
+            shutil.make_archive(filedialog, "zip", SENTRY_DIR)
 
         settings_frame = customtkinter.CTkScrollableFrame(
             self,
@@ -89,17 +92,26 @@ class Settings(customtkinter.CTkFrame):
         db_frame = customtkinter.CTkFrame(db)
         db_frame.grid_columnconfigure((0, 1, 2), weight=3, uniform="a")
         db_frame.grid_columnconfigure(3, weight=2, uniform="a")
-        db_desc = customtkinter.CTkLabel(db, text="Database path")
+        db_desc = customtkinter.CTkLabel(
+            db,
+            wraplength=720,
+            justify="left",
+            text=(
+                "You can export the generated data if you want an encrypted backup. "
+                "If you have a backup file, extract it and place it in this "
+                "displayed path."
+            ),
+        )
         db_desc_path = customtkinter.CTkLabel(
             db_frame,
-            text=master.db_path,
+            text=str(master.db_path).replace("default.enc", ""),
             anchor="w",
             fg_color=("#f0f0f0", "#282828"),
             height=40,
             corner_radius=8,
         )
         db_path_picker = customtkinter.CTkButton(
-            db_frame, text="Browse", command=browse_db_file, corner_radius=8
+            db_frame, text="Backup", command=backup_db_dir, corner_radius=8
         )
 
         db_text.pack(pady=10, anchor="w")
@@ -143,9 +155,6 @@ class Settings(customtkinter.CTkFrame):
         def save_settings():
             write_config("appearance", master.theme.get())
             customtkinter.set_appearance_mode(master.theme.get().title())
-            if self.db_path:
-                write_config("db_path", self.db_path)
-                master.db_path = self.db_path
             self.after(500, self.destroy())
 
         options_frame = customtkinter.CTkFrame(self)

@@ -7,6 +7,7 @@ import customtkinter
 from sentry.gui.screens.dashboard_screen import Dashboard
 from sentry.gui.screens.login_screen import Login
 from sentry.parser import read_config
+from sentry.vault.vault_manager import DEFAULT_VAULT
 
 SENTRY_ICON = Path(__file__).resolve().parent.parent / "assets" / "sentry-icon.ico"
 THEME_PATH = Path(__file__).resolve().parent.parent / "assets" / "theme" / "theme.json"
@@ -44,7 +45,7 @@ class App(customtkinter.CTk):
 
         self.username = read_config("username")
         self.theme = customtkinter.StringVar(value=read_config("appearance"))
-        self.db_path = read_config("db_path")
+        self.db_path = DEFAULT_VAULT
         self.current_screen = None
         self.master_password = ""
         self.login_screen()

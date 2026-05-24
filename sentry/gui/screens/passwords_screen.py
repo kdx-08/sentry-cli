@@ -46,7 +46,7 @@ class Passwords(customtkinter.CTkFrame):
         )
         tabular_data = tabularize_cred(self.cred_store)
         table = customtkinter.CTkFrame(
-            table_frame, border_color=("#e0e0e0", "#282828"), border_width=0
+            table_frame, border_width=0, fg_color=("#e0e0e0", "#282828")
         )
         table.grid_rowconfigure(
             tuple(range(len(tabular_data) + 1)), weight=1, uniform="a"
