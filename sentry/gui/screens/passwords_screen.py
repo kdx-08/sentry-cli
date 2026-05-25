@@ -46,7 +46,7 @@ class Passwords(customtkinter.CTkFrame):
         )
         tabular_data = tabularize_cred(self.cred_store)
         table = customtkinter.CTkFrame(
-            table_frame, border_width=0, fg_color=("#e0e0e0", "#282828")
+            table_frame, border_width=0, fg_color=("#f0f0f0", "#282828")
         )
         table.grid_rowconfigure(
             tuple(range(len(tabular_data) + 1)), weight=1, uniform="a"
@@ -68,16 +68,16 @@ class Passwords(customtkinter.CTkFrame):
             pwd = tabular_data[i][2]
             ctl = tabular_data[i][0]
             sitename = customtkinter.CTkLabel(
-                table, text=tabular_data[i][0], fg_color=("#e0e0e0", "#282828")
+                table, text=tabular_data[i][0], fg_color=("#f0f0f0", "#282828")
             )
             username = customtkinter.CTkLabel(
-                table, text=tabular_data[i][1], fg_color=("#e0e0e0", "#282828")
+                table, text=tabular_data[i][1], fg_color=("#f0f0f0", "#282828")
             )
             password = customtkinter.CTkButton(
                 table,
                 text=10 * "●",
-                text_color=("#282828", "#e0e0e0"),
-                fg_color=("#e0e0e0", "#282828"),
+                text_color=("#282828", "#f0f0f0"),
+                fg_color=("#f0f0f0", "#282828"),
                 hover_color=("#ffffff", "#1e1e1e"),
                 command=lambda p=pwd: (
                     self.clipboard_clear() or self.clipboard_append(p)
@@ -88,7 +88,7 @@ class Passwords(customtkinter.CTkFrame):
                 table,
                 text="",
                 image=bin_image,
-                fg_color=("#e0e0e0", "#282828"),
+                fg_color=("#f0f0f0", "#282828"),
                 border_width=0,
                 hover_color=("#ffffff", "#1e1e1e"),
                 command=lambda id=idt, c=ctl: (

@@ -98,17 +98,23 @@ class Settings(customtkinter.CTkFrame):
             justify="left",
             text=(
                 "You can export the generated data if you want an encrypted backup. "
-                "If you have a backup file, extract it and place it in this "
-                "displayed path."
+                "If you have a backup file, extract it and place the files in this "
+                "directory. This will overwrite all the exisiting credentials, so make "
+                "sure to take a backup before proceeding."
             ),
         )
-        db_desc_path = customtkinter.CTkLabel(
+        db_desc_path = customtkinter.CTkButton(
             db_frame,
             text=str(master.db_path).replace("default.enc", ""),
             anchor="w",
             fg_color=("#f0f0f0", "#282828"),
+            text_color=("#282828", "#f0f0f0"),
             height=40,
             corner_radius=8,
+            command=lambda:(
+                self.clipboard_clear() or self.clipboard_append(db_desc_path.cget("text"))
+            ),
+            hover=False,
         )
         db_path_picker = customtkinter.CTkButton(
             db_frame, text="Backup", command=backup_db_dir, corner_radius=8
