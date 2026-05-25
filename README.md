@@ -1,129 +1,68 @@
-# Sentry CLI
+# Sentry
 
-A lightweight local password manager built with Python.
+A local-first password manager built with Python.
 
-Sentry securely stores credentials in an encrypted vault on the user's device using a master password.
-All encryption and decryption happen locally.
+Sentry securely stores credentials and notes using encrypted vaults protected by a master password.
+No cloud sync, no telemetry, no external servers.
 
----
-
-# Features
-
-- Local encrypted password vault
-- Master-password based encryption
-- Secure key derivation using Argon2id
-- AES-based authenticated encryption via Fernet
-- No password recovery mechanism
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-# Security Model
+## Features
 
-- Vault data is encrypted locally
-- Master password is never stored
-- Encryption keys are derived using Argon2id
-- Decryption only occurs in memory
-- If the master password is lost, the vault cannot be recovered
-
----
-
-## Windows Installer
-
-Download the latest installer from the GitHub Releases page.
+- Encrypted local vault
+- Secure credential storage
+- Password generator
+- Modern desktop GUI
+- Dark mode support
+- Portable executable build
+- Native Windows installer
 
 ---
 
-# Running From Source
-
-## Requirements
-
-- Python 3.13+
-- pip
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the application:
-
-```bash
-python -m sentry
-```
-
----
-
-# First Launch
-
-On first launch, Sentry will:
-
-1. Create the application directory
-2. Generate a cryptographic salt
-3. Create an encrypted vault
-4. Ask for a master password
-
----
-
-# Usage
-
-Launch:
-
-```bash
-python -m sentry
-```
-
-Available operations:
-
-- Fetch credentials
-- Add credentials
-- Update credentials
-- Remove credentials
-- View credential list
-
----
-
-# CLI Commands
-
-## Help
-
-```
-python -m sentry help
-```
-
-Displays usage information.
-
----
-
-## Reset
-
-```
-python -m sentry reset
-```
-
-Permanently deletes:
-- encrypted vault data
-- stored application data
-
-This action cannot be undone.
-
----
-
-# Technologies Used
+## Tech Stack
 
 - Python
-- Argon2id
-- cryptography (Fernet)
-- Nuitka (compile)
+- CustomTkinter
+- Cryptography
+- Argon2
+- Nuitka
+- Inno Setup
 
 ---
 
-# License
+## Development
 
-MIT License
+```bash
+git clone https://github.com/kdx-08/sentry-cli.git
+
+cd sentry-cli
+
+python -m venv .venv
+
+source .venv/bin/activate
+# Windows:
+# .venv\Scripts\activate
+
+pip install -r requirements.txt
+
+python -m sentry
+```
 
 ---
 
-# Author
+## Security
 
-GitHub: https://github.com/kdx-08
+- Vault data is encrypted locally
+- No recovery mechanism
+- No internet connectivity required
+- No analytics or tracking
+
+---
+
+## License
+
+MIT

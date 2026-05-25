@@ -111,8 +111,9 @@ class Settings(customtkinter.CTkFrame):
             text_color=("#282828", "#f0f0f0"),
             height=40,
             corner_radius=8,
-            command=lambda:(
-                self.clipboard_clear() or self.clipboard_append(db_desc_path.cget("text"))
+            command=lambda: (
+                self.clipboard_clear()
+                or self.clipboard_append(db_desc_path.cget("text"))
             ),
             hover=False,
         )
