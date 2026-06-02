@@ -64,7 +64,7 @@ def generate_password(
     length=16, include_symbols=False, include_numbers=False, include_uppercase=False
 ) -> str:
     password = ""
-    charset = lower_alpha
+    charset = list(lower_alpha)
 
     if include_symbols:
         charset.extend(symbols_set)
@@ -76,6 +76,7 @@ def generate_password(
     for _ in range(length):
         password += random.choice(charset)
 
+    del charset
     return password
 
 

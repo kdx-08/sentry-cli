@@ -29,9 +29,7 @@ class Generator(customtkinter.CTkFrame):
             pg_output.clipboard_append(pg_output.cget("text"))
 
         def gen_pass():
-            is_ = False
-            iu_ = False
-            in_ = False
+            is_ = iu_ = in_ = False
             if include_symbols.get() == "yes":
                 is_ = True
             if include_uppercase.get() == "yes":
